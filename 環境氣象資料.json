@@ -1,0 +1,743 @@
+[
+    {
+        "id": "11a3a335a62e6865",
+        "type": "tab",
+        "label": "環境氣象資料",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "955deb4e42d3cef7",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "81e9b0c960f118da",
+        "type": "ui_tab",
+        "name": "氣候資料",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8eb7b4d704cd0ca3",
+        "type": "ui_group",
+        "name": "空氣品質",
+        "tab": "81e9b0c960f118da",
+        "order": 1,
+        "disp": true,
+        "width": 10,
+        "collapse": false
+    },
+    {
+        "id": "468a4217541fb06f",
+        "type": "ui_group",
+        "name": "氣溫",
+        "tab": "81e9b0c960f118da",
+        "order": 2,
+        "disp": true,
+        "width": 10,
+        "collapse": false
+    },
+    {
+        "id": "4020e33b1e35bbed",
+        "type": "debug",
+        "z": "11a3a335a62e6865",
+        "name": "輸出現在時間",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "18f49e8bf4efbc5c",
+        "type": "inject",
+        "z": "11a3a335a62e6865",
+        "name": "現在時間",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "object",
+        "payloadType": "date",
+        "x": 160,
+        "y": 280,
+        "wires": [
+            [
+                "4020e33b1e35bbed"
+            ]
+        ]
+    },
+    {
+        "id": "36dcf879302e424a",
+        "type": "http request",
+        "z": "11a3a335a62e6865",
+        "name": "空氣品質",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://data.moenv.gov.tw/api/v2/AQX_P_432?api_key=cfaa2bcd-2a3d-4e68-9e6a-62c38c25aff3",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 360,
+        "y": 360,
+        "wires": [
+            [
+                "1681392bf51d324a",
+                "0a58d69d68cf1dc3",
+                "e03a6b4136d8c6f3"
+            ]
+        ]
+    },
+    {
+        "id": "086934277e2976fc",
+        "type": "debug",
+        "z": "11a3a335a62e6865",
+        "name": "士林aqi",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "372d0d8898bddda0",
+        "type": "inject",
+        "z": "11a3a335a62e6865",
+        "name": "環境數值",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 360,
+        "wires": [
+            [
+                "36dcf879302e424a"
+            ]
+        ]
+    },
+    {
+        "id": "0a58d69d68cf1dc3",
+        "type": "change",
+        "z": "11a3a335a62e6865",
+        "name": "aqi",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.records[9].aqi",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "台北士林",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 360,
+        "wires": [
+            [
+                "086934277e2976fc",
+                "9aab1602e17dda3d",
+                "d8b61b1aab8dbf3c"
+            ]
+        ]
+    },
+    {
+        "id": "1681392bf51d324a",
+        "type": "change",
+        "z": "11a3a335a62e6865",
+        "name": "aqi",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.records[8].aqi",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "新北淡水",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 420,
+        "wires": [
+            [
+                "54784e787bb5f43f",
+                "70bf6c6e484875dd",
+                "d8b61b1aab8dbf3c"
+            ]
+        ]
+    },
+    {
+        "id": "54784e787bb5f43f",
+        "type": "debug",
+        "z": "11a3a335a62e6865",
+        "name": "淡水aqi",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "9aab1602e17dda3d",
+        "type": "ui_gauge",
+        "z": "11a3a335a62e6865",
+        "name": "",
+        "group": "8eb7b4d704cd0ca3",
+        "order": 1,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "士林",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "200",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "100",
+        "diff": false,
+        "className": "",
+        "x": 730,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "70bf6c6e484875dd",
+        "type": "ui_gauge",
+        "z": "11a3a335a62e6865",
+        "name": "",
+        "group": "8eb7b4d704cd0ca3",
+        "order": 2,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "淡水",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "200",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "100",
+        "diff": false,
+        "className": "",
+        "x": 730,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "d8b61b1aab8dbf3c",
+        "type": "ui_chart",
+        "z": "11a3a335a62e6865",
+        "name": "",
+        "group": "8eb7b4d704cd0ca3",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "折線圖",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "200",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 730,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e03a6b4136d8c6f3",
+        "type": "debug",
+        "z": "11a3a335a62e6865",
+        "name": "全部資料",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "7f13e9d4b3980799",
+        "type": "http request",
+        "z": "11a3a335a62e6865",
+        "name": "各地氣溫",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=CWA-10E1F941-7837-43A9-8778-FE90C5961165",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 360,
+        "y": 600,
+        "wires": [
+            [
+                "078417d1d60be96f",
+                "2ebff41c3238f84d",
+                "a756d31f7e05642e"
+            ]
+        ]
+    },
+    {
+        "id": "a0530a4a7a8def0f",
+        "type": "debug",
+        "z": "11a3a335a62e6865",
+        "name": "士林氣溫(陽明山)",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "d08732fa7aa4ec37",
+        "type": "inject",
+        "z": "11a3a335a62e6865",
+        "name": "氣溫數值",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "氣溫",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 600,
+        "wires": [
+            [
+                "7f13e9d4b3980799"
+            ]
+        ]
+    },
+    {
+        "id": "2ebff41c3238f84d",
+        "type": "change",
+        "z": "11a3a335a62e6865",
+        "name": "氣溫",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.records.Station[3].WeatherElement.AirTemperature",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "台北士林(陽明山)",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 600,
+        "wires": [
+            [
+                "a0530a4a7a8def0f",
+                "02f3c1602c85bfae",
+                "ab73a5d3d57e7322"
+            ]
+        ]
+    },
+    {
+        "id": "078417d1d60be96f",
+        "type": "change",
+        "z": "11a3a335a62e6865",
+        "name": "氣溫",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.records.Station[1].WeatherElement.AirTemperature",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "新北淡水",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 660,
+        "wires": [
+            [
+                "f3963cc793bc2dce",
+                "7534938b15c48212",
+                "ab73a5d3d57e7322"
+            ]
+        ]
+    },
+    {
+        "id": "f3963cc793bc2dce",
+        "type": "debug",
+        "z": "11a3a335a62e6865",
+        "name": "淡水氣溫",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "02f3c1602c85bfae",
+        "type": "ui_gauge",
+        "z": "11a3a335a62e6865",
+        "name": "",
+        "group": "468a4217541fb06f",
+        "order": 1,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "士林",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "28",
+        "x": 730,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "7534938b15c48212",
+        "type": "ui_gauge",
+        "z": "11a3a335a62e6865",
+        "name": "",
+        "group": "468a4217541fb06f",
+        "order": 2,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "淡水",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "28",
+        "x": 730,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "ab73a5d3d57e7322",
+        "type": "ui_chart",
+        "z": "11a3a335a62e6865",
+        "name": "",
+        "group": "468a4217541fb06f",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "折線圖",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "39",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 730,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a756d31f7e05642e",
+        "type": "debug",
+        "z": "11a3a335a62e6865",
+        "name": "全部資料",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "d8deb10ca3ed64c5",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "dashboard-evi": "1.0.2"
+        }
+    }
+]
